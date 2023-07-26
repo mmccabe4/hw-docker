@@ -13,7 +13,7 @@ jobs:
         with:
           access_token: ${{ secrets.HW_ACCESS_TOKEN }}
           secrets: |
-            69110755-3955-4645-9404-b04501625a05 > DOCKER_USER
+            a98ac93f-ae42-47ec-bb1b-b04b012be9ab > DOCKER_USER
             313c412f-968a-443f-b50b-b04a00e490bc > DOCKER_PASSWORD
 
       - uses: actions/checkout@v3
