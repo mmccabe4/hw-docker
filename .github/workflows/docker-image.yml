@@ -2,11 +2,6 @@ name: Push to Docker Hub
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Hello world version 1.0"
-        required: true
-        type: string
 
 jobs:
   build:
@@ -15,7 +10,7 @@ jobs:
       - name: Bitwarden Secrets Manager GitHub Action
         uses: bitwarden/sm-action@v1.0.0
         with:
-          access_token: HW_ACCESS_TOKEN
+          access_token: ${{ secrets.HW_ACCESS_TOKEN }}
           secrets: |
             69110755-3955-4645-9404-b04501625a05 > DOCKER_USER
             313c412f-968a-443f-b50b-b04a00e490bc > DOCKER_PASSWORD
@@ -25,8 +20,6 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: docker build
         run: |
-          docker build . --file Dockerfile --tag mcwriter/hwdocker:latest \
-          --tag mcwriter/hwdocker:latest \
-          --tag mcwriter/hwdocker:latest
+          docker build . --file Dockerfile --tag $DOCKER_USER/hwdocker:latest
       - name: docker push
-        run: docker push -a mcwriter/hwdocker:latest
+        run: docker push $DOCKER_USER/hwdocker:latest
