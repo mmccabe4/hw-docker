@@ -1,2 +1,2 @@
 FROM alpine
-ENTRYPOINT [ "echo", "hello world, this is the Docker image!" ]
+ENTRYPOINT [ "echo", "hello world, this is the updated Docker image!" ]
