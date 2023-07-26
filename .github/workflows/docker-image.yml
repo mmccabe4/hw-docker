@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "bw version (just the numbers, e.g. 2023.7.0)"
+        description: "Hello world version 1.0"
         required: true
         type: string
 
@@ -15,18 +15,18 @@ jobs:
       - name: Bitwarden Secrets Manager GitHub Action
         uses: bitwarden/sm-action@v1.0.0
         with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
+          access_token: secrets.HWS_ACCESS_TOKEN
           secrets: |
-            d8a56663-858c-4aac-b0a2-afcd00edf2f1 > DOCKER_USER
-            98fc7325-57d2-4910-b37c-afcd00ed81b7 > DOCKER_PASSWORD
+            69110755-3955-4645-9404-b04501625a05 > DOCKER_USER
+            313c412f-968a-443f-b50b-b04a00e490bc > DOCKER_PASSWORD
 
       - uses: actions/checkout@v3
       - name: docker login
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: docker build
         run: |
-          docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest \
-          --tag $DOCKER_USER/bw-cli:${{ github.event.inputs.version }} \
-          --tag $DOCKER_USER/bw-cli:v${{ github.event.inputs.version }}
+          docker build . --file Dockerfile --tag mcwriter/hwdocker:latest \
+          --tag mcwriter/hwdocker:latest \
+          --tag mcwriter/hwdocker:latest
       - name: docker push
-        run: docker push -a $DOCKER_USER/bw-cli
+        run: docker push -a mcwriter/hwdocker:latest
