@@ -23,4 +23,4 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag $DOCKER_USER/hwdocker
       - name: docker push
-        run: docker push $DOCKER_USER/hwdocker:latest
+        run: docker push $DOCKER_USER/hwdocker
